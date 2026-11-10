@@ -13,20 +13,41 @@
       "source": "2026R1_V2.glb"
     },
     {
-      "id": "r2025-chassis",
-      "name": "2025 赛季 R1 底盘",
+      "id": "r2026-r2",
+      "name": "2026 赛季 R2 整机",
+      "season": "2026",
+      "badge": "整机 · 武林探秘",
+      "file": "r2026-r2.glb",
+      "triangles": 1480670,
+      "size": [0.9859, 1.2768, 1.2674],
+      "note": "2026 赛季 R2 整机，SolidWorks 总装导出，保留装配结构与零件颜色；网页版已抽稀并做 meshopt 压缩。",
+      "source": "2026_R2_V2.glb"
+    },
+    {
+      "id": "r2025-r2",
+      "name": "2025 赛季 R2 进攻车",
       "season": "2025",
-      "badge": "底盘 · 舵轮",
-      "file": "r2025-chassis.glb",
-      "triangles": 224312,
-      "size": [0.7037, 0.3542, 0.7044],
-      "note": "SolidWorks 导出的 URDF 包（7 个零件）按关节位姿装配而成，含 3 组舵轮模块。",
-      "source": "M-25-R1-V1 / 底盘 / R2025.SLDASM"
+      "badge": "整机 · 进攻车",
+      "file": "r2025-r2.glb",
+      "triangles": 1081087,
+      "size": [1.0128, 1.7627, 1.023],
+      "note": "2025 赛季 R2 进攻车总装，SolidWorks 导出，保留装配结构与零件颜色；网页版已抽稀并做 meshopt 压缩。",
+      "source": "2025__R2进攻车总装.glb"
+    },
+    {
+      "id": "r2024-r1",
+      "name": "2024 赛季 R1 整机",
+      "season": "2024",
+      "badge": "整机 · 2024",
+      "file": "r2024-r1.glb",
+      "triangles": 1098959,
+      "size": [1.1484, 0.9175, 1.1557],
+      "note": "2024 赛季 R1 整机，SolidWorks 总装导出，保留装配结构与零件颜色；网页版已抽稀并做 meshopt 压缩。",
+      "source": "2024R1.glb"
     }
   ],
   "planned": [
-    { "name": "2026 赛季 R2 整机", "hint": "在 SolidWorks 打开总装 → 另存为 STEP 或 STL" },
-    { "name": "2025 赛季 R2 整机", "hint": "同上" },
-    { "name": "2024 赛季 R1 / R2 整机", "hint": "同上" }
+    { "name": "2025 赛季 R1 整机", "hint": "在 SolidWorks 打开总装 → 另存为 STEP 或 STL" },
+    { "name": "2024 赛季 R2 整机", "hint": "同上" }
   ]
 }
