@@ -1963,13 +1963,6 @@ button {
   gap: 2px;
 }
 
-.viewer__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: flex-end;
-}
-
 .viewer__tools {
   position: absolute;
   right: 16px;

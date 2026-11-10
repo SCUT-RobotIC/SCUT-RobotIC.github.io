@@ -14,7 +14,6 @@ function init() {
   const canvas = host.querySelector("canvas");
   const stage = host.querySelector(".viewer__stage");
   const statusEl = host.querySelector("[data-viewer-status]");
-  const metaEl = host.querySelector("[data-viewer-meta]");
   const tabsEl = document.querySelector("[data-model-tabs]");
   const progressEl = host.querySelector("[data-viewer-progress]");
   const progressBar = host.querySelector("[data-viewer-progress] .bar");
@@ -166,7 +165,6 @@ function init() {
   function loadModel(item) {
     clearModel();
     setStatus("加载中…");
-    if (metaEl) metaEl.textContent = "";
 
     loader.load(
       "assets/models/" + item.file,
@@ -184,26 +182,7 @@ function init() {
         modelGroup.add(current);
         frameObject(current);
 
-        const tris =
-          item.triangles ||
-          (() => {
-            let n = 0;
-            current.traverse((o) => {
-              if (o.isMesh && o.geometry?.index) n += o.geometry.index.count / 3;
-              else if (o.isMesh && o.geometry?.attributes?.position)
-                n += o.geometry.attributes.position.count / 3;
-            });
-            return Math.round(n);
-          })();
-
         setStatus("就绪");
-        if (metaEl) {
-          const [w, h, d] = item.size || [0, 0, 0];
-          metaEl.innerHTML =
-            `<span>${(w * 100).toFixed(0)} × ${(d * 100).toFixed(0)} cm</span>` +
-            `<span>${(h * 100).toFixed(0)} cm 高</span>` +
-            `<span>${tris.toLocaleString("zh-CN")} 三角面</span>`;
-        }
         if (item.note) {
           const noteEl = document.querySelector("[data-viewer-note]");
           if (noteEl) noteEl.textContent = item.note;
@@ -216,7 +195,6 @@ function init() {
       (err) => {
         console.error(err);
         setStatus("模型加载失败");
-        if (metaEl) metaEl.textContent = "请检查 assets/models/" + item.file;
       }
     );
   }
