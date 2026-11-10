@@ -16,27 +16,59 @@
 | `robots.html` | 机器人与战绩：机器人谱系、完整战绩、技术栈、图集（灯箱） |
 | `sponsor.html` | 招商合作：为什么合作、12 项赞助商权益、支持形式、合作案例、伙伴、联系方式 |
 | `join.html` | 加入我们：招新流程、五个组别（标签页）、科普组分级体系、FAQ、报名二维码 |
+| `models.html` | 三维模型：浏览器里 360° 查看历年机器人（three.js + glTF） |
 | `404.html` | 自定义 404 页面 |
 
 ## 目录
 
 ```
 .
-├── index.html / lab.html / robots.html / sponsor.html / join.html / 404.html
+├── index.html / lab.html / robots.html / models.html / sponsor.html / join.html / 404.html
 ├── assets/
 │   ├── css/style.css      # 设计系统与全部样式（无框架）
 │   ├── js/main.js         # 导航、滚动动效、标签页、灯箱（原生 JS）
-│   └── img/               # 站点使用的图片资源（已压缩）
+│   ├── img/               # 站点使用的图片资源（已压缩）
+│   ├── models/            # 三维模型（.glb）与 manifest.json
+│   └── vendor/three/      # 本地内置的 three.js（不走 CDN）
 ├── tools/build_assets.py  # 从原始素材生成 web 图片
+├── tools/cad_to_glb.py    # CAD（URDF/STEP/STL/3MF）→ glb
+├── tools/serve.py         # 本地预览服务器（修正 .js 的 MIME）
 ├── sitemap.xml / robots.txt / .nojekyll
 ```
+
+## 三维模型
+
+`models.html` 用 three.js 在浏览器里渲染 `.glb`，无需安装任何软件。
+浏览器读不了 SolidWorks 的 `.sldprt` / `.sldasm`，所以需要先导出一次中性格式：
+
+1. **SolidWorks 里导出**：打开当年总装 → 另存为 `STEP`（保留零件颜色）或 `STL` / `3MF`（更轻，单色）。
+   已有 URDF 包（`meshes/*.STL` + `.urdf`）的，直接把整个包目录丢进来也行。
+2. **转成 glb**：
+
+   ```powershell
+   python tools/cad_to_glb.py "路径/总装.STEP" -o assets/models/r26-r1.glb
+   python tools/cad_to_glb.py "路径/R2025.SLDASM" -o assets/models/r25-chassis.glb   # URDF 包目录
+   ```
+
+   脚本会自动：Z-up → Y-up、毫米 → 米、水平居中、底部贴地。
+3. **挂到清单**：在 `assets/models/manifest.json` 的 `models` 数组里加一项（`name` / `season` / `file` / `triangles` / `size`），页面会自己出现新的模型标签。
+
+转换依赖：`pip install trimesh`（网格）；要读 STEP 再加 `pip install cadquery`；
+网格太大时 `pip install fast-simplification` 并在命令里加 `--target-tris 200000`。
+
+单个模型建议控制在 3–8 MB（20–30 万三角面），再大手机加载会卡。
 
 ## 本地预览
 
 站点是纯静态的，任选一种方式：
 
 ```powershell
-# 直接用浏览器打开
+# 推荐：带正确 MIME 的本地服务器（Windows 上裸 http.server 会把 .js 当 text/plain，
+# 导致浏览器拒绝执行 ES module，三维页面加载不出来）
+python tools/serve.py 8000
+# 然后访问 http://127.0.0.1:8000
+
+# 或者直接用浏览器打开（三维页面需要 http，file:// 会被 CORS 拦）
 start index.html
 
 # 或者起一个本地服务（推荐，路径与线上一致）

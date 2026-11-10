@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三维模型 | 华南理工大学 RobotIC 机器人实验室</title>
+<meta name="description" content="在浏览器里 360° 查看 RobotIC 实验室历年机器人：SolidWorks 装配体转换成的 glTF 模型，可直接旋转、缩放、平移，无需安装任何软件。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://scut-robotic.github.io/models.html">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<meta name="theme-color" content="#0b0c0e">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="华南理工大学 RobotIC 机器人实验室">
+<meta property="og:title" content="三维模型 | RobotIC 机器人实验室">
+<meta property="og:description" content="在浏览器里 360° 查看实验室历年机器人的三维模型。">
+<meta property="og:image" content="https://scut-robotic.github.io/assets/img/og-cover.jpg">
+<meta property="og:url" content="https://scut-robotic.github.io/models.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/vendor/three/three.module.min.js",
+    "three/addons/": "./assets/vendor/three/addons/"
+  }
+}
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__brand">
+      <span>华南理工大学 · 广州国际校区</span>
+      <span class="topbar__sep"></span>
+      <span>机器人创新基地</span>
+    </div>
+    <div class="topbar__meta">
+      <span><i class="dot-live"></i>27 赛季备赛进行中</span>
+      <a href="join.html">招新进行时 →</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo-robotic-white.png" alt="RobotIC 队徽">
+      <span class="brand__text"><strong>RobotIC 机器人实验室</strong><span>SCUT · ROBOTIC</span></span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="lab.html">实验室</a></li>
+      <li><a href="robots.html">机器人与战绩</a></li>
+      <li><a href="models.html" aria-current="page">三维模型</a></li>
+      <li><a href="sponsor.html">招商合作</a></li>
+      <li><a href="join.html">加入我们</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a class="btn btn--primary btn--sm" href="join.html">报名加入</a>
+      <button class="nav__toggle" type="button" aria-label="展开导航" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="page-hero__grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="page-hero__inner">
+      <nav class="crumb" aria-label="面包屑"><a href="index.html">首页</a><span>/</span>三维模型</nav>
+      <h1>把机器人<br>转过来看</h1>
+      <p>
+        历年机器人的 SolidWorks 模型已经转成 glTF（.glb），浏览器里直接加载 ——
+        不用装 SolidWorks，不用下载，左键拖动旋转、滚轮缩放、右键平移。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="model-tabs" data-model-tabs aria-label="选择模型"></div>
+
+    <div class="viewer" data-viewer>
+      <div class="viewer__stage">
+        <canvas aria-label="机器人三维模型，可拖动旋转"></canvas>
+
+        <div class="viewer__hud">
+          <span class="viewer__status"><i class="dot-live"></i><span data-viewer-status>准备中…</span></span>
+          <span class="viewer__meta" data-viewer-meta></span>
+        </div>
+
+        <div class="viewer__progress" data-viewer-progress><div class="bar"></div></div>
+
+        <div class="viewer__tools">
+          <button type="button" class="viewer__btn is-on" data-viewer-spin aria-pressed="true" title="自动旋转">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 12a8 8 0 11-2.3-5.6"/><path d="M20 4v4h-4"/></svg>
+            自动旋转
+          </button>
+          <button type="button" class="viewer__btn" data-viewer-reset title="复位视角">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9V5h4"/><path d="M4 5l5 5"/><circle cx="12" cy="13" r="7"/></svg>
+            复位
+          </button>
+        </div>
+
+        <div class="viewer__hint">
+          <span>拖动旋转</span><span>滚轮缩放</span><span>右键平移</span>
+        </div>
+
+        <noscript><p class="viewer__fallback">三维查看需要启用 JavaScript。</p></noscript>
+      </div>
+      <div class="viewer__foot">
+        <p class="viewer__note" data-viewer-note></p>
+        <p class="mono-label" style="margin:0">glTF · WebGL</p>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:22px;max-width:760px">
+      模型来自实验室当年的 SolidWorks 装配体，导出后统一转换与压缩，只保留可视化几何
+      —— 不包含装配约束、参数化特征与工程图，因此只能看、不能拆装。
+    </p>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-head__label">Pipeline</p>
+        <h2>模型是怎么上网页的</h2>
+      </div>
+      <p class="section-head__note">
+        浏览器读不了 SLDPRT / SLDASM（SolidWorks 私有格式），所以必须先导出一次中性格式。
+      </p>
+    </div>
+
+    <div class="steps" style="grid-template-columns:repeat(4,1fr)">
+      <div class="step">
+        <h3>SolidWorks 导出</h3>
+        <p>打开当年总装 → 另存为 STEP（保留颜色）或 STL / 3MF（更轻，单色）。</p>
+      </div>
+      <div class="step">
+        <h3>转成 glTF</h3>
+        <p><code>python tools/cad_to_glb.py</code> 把 URDF 包 / 网格 / STEP 转成 .glb，并按关节位姿装配。</p>
+      </div>
+      <div class="step">
+        <h3>压到网页友好</h3>
+        <p>抽稀到目标面数、去掉重复顶点、统一成米制与 Y 轴向上，单个模型控制在 3–8 MB。</p>
+      </div>
+      <div class="step">
+        <h3>挂到清单</h3>
+        <p>在 <code>assets/models/manifest.json</code> 里加一行，页面自动出现新的模型标签。</p>
+      </div>
+    </div>
+
+    <div class="grid grid--2" style="margin-top:24px">
+      <div class="card card--flat" data-reveal>
+        <span class="card__num">AVAILABLE</span>
+        <h3 style="margin-top:12px">已经在网页上</h3>
+        <p>2025 赛季 R1 底盘（舵轮底盘 7 个零件，22.4 万三角面）。这是仓库里唯一一份带装配位姿的导出，其余赛季的总装还是 SLDASM。</p>
+      </div>
+      <div class="card card--flat" data-reveal data-reveal-delay="80">
+        <span class="card__num">COMING NEXT</span>
+        <h3 style="margin-top:12px">待补的总装</h3>
+        <p>2026 / 2025 / 2024 赛季的 R1、R2 整机。只要有人把总装另存为 STEP 或 STL 放进 <code>模型/</code>，一条命令就能上线。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta__inner">
+    <div data-reveal>
+      <p class="section-head__label">More machines</p>
+      <h2>想看你那一年的车？</h2>
+      <p>如果你手上还有当年总装的 SolidWorks 文件，导出后交给宣运组，我们把它挂到这一页上。</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="join.html">加入我们</a>
+        <a class="btn btn--ghost" href="robots.html">先看渲染图与战绩</a>
+      </div>
+    </div>
+    <div class="cta__card" data-reveal data-reveal-delay="120">
+      <h3>Technical notes</h3>
+      <dl>
+        <div><dt>格式</dt><dd>glTF 2.0 二进制（.glb）</dd></div>
+        <div><dt>渲染</dt><dd>three.js · WebGL 2</dd></div>
+        <div><dt>坐标</dt><dd>米制 · Y 轴向上</dd></div>
+        <div><dt>交互</dt><dd>旋转 / 缩放 / 平移</dd></div>
+        <div><dt>转换脚本</dt><dd>tools/cad_to_glb.py</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/img/logo-robotic-white.png" alt="RobotIC 队徽">
+        <p>华南理工大学（华工）RobotIC 机器人实验室<br>SCUT ROBOTIC · 机器人创新基地</p>
+        <p>广东省广州市番禺区兴业大道东 777 号<br>华南理工大学广州国际校区</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="lab.html">实验室</a></li>
+          <li><a href="robots.html">机器人与战绩</a></li>
+          <li><a href="models.html">三维模型</a></li>
+          <li><a href="sponsor.html">招商合作</a></li>
+          <li><a href="join.html">加入我们</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:dzhang@scut.edu.cn">dzhang@scut.edu.cn</a></li>
+          <li><a href="mailto:2784198652@qq.com">2784198652@qq.com</a></li>
+          <li>张东 13751856265</li>
+          <li>陈俊兆 16675189622</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <div class="footer__qr">
+          <figure><img src="assets/img/qr/wechat.png" alt="微信公众号二维码" loading="lazy"><figcaption>公众号</figcaption></figure>
+          <figure><img src="assets/img/qr/bilibili.png" alt="B 站二维码" loading="lazy"><figcaption>B 站</figcaption></figure>
+          <figure><img src="assets/img/qr/rednote.png" alt="小红书二维码" loading="lazy"><figcaption>小红书</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> 华南理工大学 RobotIC 机器人实验室 · 保留所有权利</span>
+      <span>本站图片与文字由 RobotIC 实验室提供 · <a href="sponsor.html">合作请联系</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script type="module" src="assets/js/viewer.js"></script>
+</body>
+</html>

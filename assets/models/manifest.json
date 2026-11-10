@@ -1,0 +1,21 @@
+{
+  "updated": "2026-11-10",
+  "models": [
+    {
+      "id": "r2025-chassis",
+      "name": "2025 赛季 R1 底盘",
+      "season": "2025",
+      "badge": "底盘 · 舵轮",
+      "file": "r2025-chassis.glb",
+      "triangles": 224312,
+      "size": [0.7037, 0.3542, 0.7044],
+      "note": "SolidWorks 导出的 URDF 包（7 个零件）按关节位姿装配而成，含 3 组舵轮模块。",
+      "source": "M-25-R1-V1 / 底盘 / R2025.SLDASM"
+    }
+  ],
+  "planned": [
+    { "name": "2026 赛季 R1 / R2 整机", "hint": "在 SolidWorks 打开总装 → 另存为 STEP 或 STL" },
+    { "name": "2025 赛季 R2 整机", "hint": "同上" },
+    { "name": "2024 赛季 R1 / R2 整机", "hint": "同上" }
+  ]
+}
