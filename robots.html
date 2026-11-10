@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <title>机器人与战绩 | 华南理工大学 RobotIC 机器人实验室</title>
-<meta name="description" content="RobotIC 四个赛季的机器人谱系与完整战绩：2023 吴哥之花、2024 颗粒归仓、2025 飞身上篮、2026 武林探秘，以及机械 / 电控 / 算法三个方向的技术栈。">
+<meta name="description" content="RobotIC 四个赛季的机器人谱系、2026 R1/R2 可 360° 查看的三维模型、完整战绩与技术栈。">
 <link rel="canonical" href="https://robot-ic.com/robots.html">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
@@ -13,10 +13,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="华南理工大学 RobotIC 机器人实验室">
 <meta property="og:title" content="机器人与战绩 | RobotIC 机器人实验室">
-<meta property="og:description" content="四个赛季的机器人谱系、完整战绩与技术栈。">
+<meta property="og:description" content="四个赛季的机器人谱系、可 360° 查看的三维模型、完整战绩与技术栈。">
 <meta property="og:image" content="https://robot-ic.com/assets/img/og-cover.jpg">
 <meta property="og:url" content="https://robot-ic.com/robots.html">
 <meta name="twitter:card" content="summary_large_image">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/vendor/three/three.module.min.js",
+    "three/addons/": "./assets/vendor/three/addons/"
+  }
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -24,7 +32,7 @@
   "@id": "https://robot-ic.com/robots.html#webpage",
   "url": "https://robot-ic.com/robots.html",
   "name": "机器人与战绩 | 华南理工大学 RobotIC 机器人实验室",
-  "description": "RobotIC 四个赛季的机器人谱系与完整战绩：2023 吴哥之花、2024 颗粒归仓、2025 飞身上篮、2026 武林探秘，以及机械 / 电控 / 算法三个方向的技术栈。",
+  "description": "RobotIC 四个赛季的机器人谱系、2026 R1/R2 三维模型与完整战绩，以及机械 / 电控 / 算法三个方向的技术栈。",
   "inLanguage": "zh-CN",
   "isPartOf": {
     "@id": "https://robot-ic.com/#website"
@@ -79,7 +87,6 @@
       <li><a href="index.html">首页</a></li>
       <li><a href="lab.html">实验室</a></li>
       <li><a href="robots.html" aria-current="page">机器人与战绩</a></li>
-      <li><a href="models.html">三维模型</a></li>
       <li><a href="sponsor.html">招商合作</a></li>
       <li><a href="join.html">加入我们</a></li>
     </ul>
@@ -174,20 +181,57 @@
   </div>
 </section>
 
-<section class="section section--tight" style="padding-top:0">
+<section class="section" id="model-3d">
   <div class="container">
-    <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:30px 34px;background:linear-gradient(120deg,rgba(232,38,26,.14),rgba(20,22,27,.5));border-color:rgba(232,38,26,.32)">
-      <div style="display:flex;align-items:center;gap:20px;min-width:260px">
-        <div class="card__icon" style="margin:0;flex:none">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
-        </div>
-        <div>
-          <h3 style="margin:0 0 6px">想转到背面看看？</h3>
-          <p style="margin:0">当年的 SolidWorks 装配体已转成 glTF，可在浏览器里 360° 旋转、缩放查看。</p>
-        </div>
+    <div class="section-head">
+      <div>
+        <p class="section-head__label">Interactive 3D</p>
+        <h2>转到背面看看</h2>
       </div>
-      <a class="btn btn--primary" href="models.html">打开三维模型</a>
+      <p class="section-head__note">
+        2026 赛季 R1 / R2 的 SolidWorks 总装已转成 glTF：拖动旋转、滚轮缩放、右键平移，不用装 SolidWorks。
+      </p>
     </div>
+
+    <div class="model-tabs" data-model-tabs aria-label="选择模型"></div>
+
+    <div class="viewer" data-viewer>
+      <div class="viewer__stage">
+        <canvas aria-label="机器人三维模型，可拖动旋转"></canvas>
+
+        <div class="viewer__hud">
+          <span class="viewer__status"><i class="dot-live"></i><span data-viewer-status>准备中…</span></span>
+          <span class="viewer__meta" data-viewer-meta></span>
+        </div>
+
+        <div class="viewer__progress" data-viewer-progress><div class="bar"></div></div>
+
+        <div class="viewer__tools">
+          <button type="button" class="viewer__btn is-on" data-viewer-spin aria-pressed="true" title="自动旋转">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 12a8 8 0 11-2.3-5.6"/><path d="M20 4v4h-4"/></svg>
+            自动旋转
+          </button>
+          <button type="button" class="viewer__btn" data-viewer-reset title="复位视角">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9V5h4"/><path d="M4 5l5 5"/><circle cx="12" cy="13" r="7"/></svg>
+            复位
+          </button>
+        </div>
+
+        <div class="viewer__hint">
+          <span>拖动旋转</span><span>滚轮缩放</span><span>右键平移</span>
+        </div>
+
+        <noscript><p class="viewer__fallback">三维查看需要启用 JavaScript。</p></noscript>
+      </div>
+      <div class="viewer__foot">
+        <p class="viewer__note" data-viewer-note></p>
+        <p class="mono-label" style="margin:0">glTF · WebGL</p>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:22px;max-width:760px">
+      模型只保留可视化几何 —— 不包含装配约束、参数化特征与工程图，所以只能看、不能拆装。
+    </p>
   </div>
 </section>
 
@@ -396,8 +440,7 @@
           <li><a href="index.html">首页</a></li>
           <li><a href="lab.html">实验室</a></li>
           <li><a href="robots.html">机器人与战绩</a></li>
-          <li><a href="models.html">三维模型</a></li>
-          <li><a href="sponsor.html">招商合作</a></li>
+              <li><a href="sponsor.html">招商合作</a></li>
           <li><a href="join.html">加入我们</a></li>
         </ul>
       </div>
@@ -432,5 +475,6 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+<script type="module" src="assets/js/viewer.js"></script>
 </body>
 </html>

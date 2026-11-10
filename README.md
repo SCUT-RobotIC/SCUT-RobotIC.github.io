@@ -13,17 +13,16 @@
 | --- | --- |
 | `index.html` | 首页：实验室概览、赛季战绩、机器人、五个方向、合作伙伴、招商联络 |
 | `lab.html` | 实验室：简介、四年时间线、组织架构、赛场之外的高光时刻、地址与联系 |
-| `robots.html` | 机器人与战绩：机器人谱系、完整战绩、技术栈、图集（灯箱） |
+| `robots.html` | 机器人与战绩：机器人谱系、2026 R1/R2 三维模型（three.js + glTF）、完整战绩、技术栈、图集（灯箱） |
 | `sponsor.html` | 招商合作：为什么合作、12 项赞助商权益、支持形式、合作案例、伙伴、联系方式 |
 | `join.html` | 加入我们：招新流程、五个组别（标签页）、科普组分级体系、FAQ、报名二维码 |
-| `models.html` | 三维模型：浏览器里 360° 查看历年机器人（three.js + glTF） |
 | `404.html` | 自定义 404 页面 |
 
 ## 目录
 
 ```
 .
-├── index.html / lab.html / robots.html / models.html / sponsor.html / join.html / 404.html
+├── index.html / lab.html / robots.html / sponsor.html / join.html / 404.html
 ├── assets/
 │   ├── css/style.css      # 设计系统与全部样式（无框架）
 │   ├── js/main.js         # 导航、滚动动效、标签页、灯箱（原生 JS）
@@ -36,9 +35,9 @@
 ├── sitemap.xml / robots.txt / .nojekyll
 ```
 
-## 三维模型
+## 三维模型（已并入机器人与战绩）
 
-`models.html` 用 three.js 在浏览器里渲染 `.glb`，无需安装任何软件。
+`robots.html` 的「转到背面看看」用 three.js 在浏览器里渲染 `.glb`，无需安装任何软件。
 浏览器读不了 SolidWorks 的 `.sldprt` / `.sldasm`，所以需要先导出一次中性格式：
 
 1. **SolidWorks 里导出**：打开当年总装 → 另存为 `STEP`（保留零件颜色）或 `STL` / `3MF`（更轻，单色）。
