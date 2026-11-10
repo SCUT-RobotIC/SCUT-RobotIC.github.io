@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 const BG = 0x0b0c0e;
 
@@ -27,11 +28,18 @@ function init() {
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 0.92;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
   scene.background = null;
+
+  // 影棚环境光：让铝件、碳板、塑料都有正确的高光与反射
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  const envRT = pmrem.fromScene(new RoomEnvironment(), 0.045);
+  scene.environment = envRT.texture;
+  scene.environmentIntensity = 0.42;
 
   const camera = new THREE.PerspectiveCamera(38, 1, 0.01, 100);
   camera.position.set(1.4, 1.0, 1.6);
@@ -46,7 +54,7 @@ function init() {
   controls.autoRotateSpeed = 0.8;
 
   // 灯光：主光 + 补光 + 顶部柔光，让金属/塑料都能看出结构
-  const key = new THREE.DirectionalLight(0xffffff, 2.4);
+  const key = new THREE.DirectionalLight(0xffffff, 1.25);
   key.position.set(2.4, 4.2, 2.6);
   key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048);
@@ -54,15 +62,15 @@ function init() {
   key.shadow.normalBias = 0.01;
   scene.add(key);
 
-  const fill = new THREE.DirectionalLight(0xbcd0ff, 0.75);
+  const fill = new THREE.DirectionalLight(0xbcd0ff, 0.35);
   fill.position.set(-2.6, 1.4, -1.8);
   scene.add(fill);
 
-  const rim = new THREE.DirectionalLight(0xff9d80, 0.55);
+  const rim = new THREE.DirectionalLight(0xff9d80, 0.3);
   rim.position.set(0.6, 1.2, -3);
   scene.add(rim);
 
-  scene.add(new THREE.HemisphereLight(0xdfe8ff, 0x14171b, 0.9));
+  scene.add(new THREE.HemisphereLight(0xdfe8ff, 0x14171b, 0.4));
 
   // 地面：柔和阴影 + 细网格
   const groundMat = new THREE.ShadowMaterial({ color: 0x000000, opacity: 0.38 });

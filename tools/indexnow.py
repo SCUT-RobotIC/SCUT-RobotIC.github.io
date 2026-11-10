@@ -2,7 +2,7 @@
 """Submit every page to IndexNow (Bing / Yandex / Seznam instant indexing).
 
 The site hosts a key file named <KEY>.txt at the repository root; IndexNow
-verifies ownership by fetching https://scut-robotic.github.io/<KEY>.txt.
+verifies ownership by fetching https://robot-ic.com/<KEY>.txt.
 
 Usage:  python tools/indexnow.py [--dry-run]
 """
@@ -11,10 +11,10 @@ import os
 import sys
 import urllib.request
 
-HOST = "scut-robotic.github.io"
+HOST = "robot-ic.com"
 KEY = "2fe03bd31099457d853263651e8c781c"
 KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
-PAGES = ["", "lab.html", "robots.html", "sponsor.html", "join.html"]
+PAGES = ["", "lab.html", "robots.html", "models.html", "sponsor.html", "join.html"]
 ENDPOINT = "https://api.indexnow.org/indexnow"
 
 
