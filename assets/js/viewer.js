@@ -141,9 +141,9 @@ function init() {
   function progressPercent(loaded, total, expected) {
     if (!loaded) return 0;
     // GitHub Pages 会 gzip .glb：evt.total 是压缩后大小，loaded 却是解压后大小，
-    // 直接相除会得到 200%。超过 total 时改用 manifest 里的真实字节数。
+    // 直接相除会得到 200%。检测到 gzip 时改用 manifest 里的真实字节数。
     let denom = total;
-    if (expected && total && loaded > total * 1.02) denom = expected;
+    if (expected && total && expected > total * 1.02) denom = expected;
     if (!denom) denom = expected;
     if (!denom) return 0;
     return Math.min(100, Math.max(0, Math.round((loaded / denom) * 100)));
