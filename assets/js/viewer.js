@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { MeshoptDecoder } from "../vendor/meshopt/meshopt_decoder.js";
 
 const BG = 0x0b0c0e;
 
@@ -89,6 +90,7 @@ function init() {
   scene.add(modelGroup);
 
   const loader = new GLTFLoader();
+  loader.setMeshoptDecoder(MeshoptDecoder);
   let current = null;
   let frameBox = null;
 
