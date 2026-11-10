@@ -1,4 +1,4 @@
 ﻿User-agent: *
 Allow: /
 
-Sitemap: https://scut-robotic.github.io/sitemap.xml
+Sitemap: https://scut-robotic.github.io/RobotIC.github.io/sitemap.xml

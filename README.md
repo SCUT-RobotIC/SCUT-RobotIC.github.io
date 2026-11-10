@@ -3,7 +3,7 @@
 华南理工大学 RobotIC 机器人实验室的官方网站（机器人实验室介绍 + 招商合作 + 招新）。
 纯静态站点，无需构建工具，直接由 GitHub Pages 托管。
 
-- 站点地址：<https://scut-robotic.github.io/>
+- 站点地址：<https://scut-robotic.github.io/RobotIC.github.io/>
 - 赛事：ABU ROBOCON 全国大学生机器人大赛
 - 实验室成立：2022 年 12 月 · 广州国际校区
 
@@ -71,7 +71,7 @@ python tools/build_assets.py
 
 ## 部署
 
-推送到 `main` 分支后，GitHub Pages 自动发布到 <https://scut-robotic.github.io/>。
+推送到 `main` 分支后，GitHub Pages 自动发布到 <https://scut-robotic.github.io/RobotIC.github.io/>。
 仓库内的 `.nojekyll` 会关闭 Jekyll 处理，静态文件按原样发布。
 
 © 华南理工大学 RobotIC 机器人实验室
