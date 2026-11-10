@@ -682,6 +682,28 @@ button {
   max-width: 780px;
 }
 
+/* decorative render on the right edge of a page hero */
+.page-hero--media::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 62%;
+  background: url("../img/join-hero.jpg") no-repeat right center / contain;
+  opacity: 0.55;
+  filter: brightness(0.8) contrast(1.05);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 35%, #000 72%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 35%, #000 72%);
+  pointer-events: none;
+}
+
+@media (max-width: 960px) {
+  .page-hero--media::before {
+    display: none;
+  }
+}
+
 .page-hero h1 {
   margin: 18px 0 0;
   font-size: clamp(32px, 4.6vw, 60px);

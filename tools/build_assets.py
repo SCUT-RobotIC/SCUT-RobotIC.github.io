@@ -195,7 +195,7 @@ def main():
     report.append(save_png(square, "favicon.png"))
 
     # ---------- school marks ----------
-    for name, out in [("校徽及配字（红）.png", "scut-logo.png"), ("国际校区校徽.png", "gzic-logo.png")]:
+    for name, out in [("校徽及配字（红）.png", "scut-logo.png")]:
         im = trim(open_rgba(os.path.join(SRC, name)))
         w = im.width
         im = im.resize((900, round(im.height * 900 / w)), Image.LANCZOS)
@@ -240,7 +240,6 @@ def main():
 
     # ---------- hero ----------
     report.append(hero_image(os.path.join(SRC, "26赛季机器人渲染图", "R2机器人.png"), "hero-r2.jpg", 2200))
-    report.append(hero_image(os.path.join(SRC, "24赛季机器人渲染图", "合照 (1).png"), "hero-team.jpg", 2200))
     report.append(hero_image(os.path.join(SRC, "26赛季机器人渲染图", "R1机器人第二张.png"), "join-hero.jpg", 1800, flip=True))
 
     # ---------- gallery ----------
