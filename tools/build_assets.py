@@ -194,13 +194,6 @@ def main():
     square = square.resize((512, 512), Image.LANCZOS)
     report.append(save_png(square, "favicon.png"))
 
-    # ---------- school marks ----------
-    for name, out in [("校徽及配字（红）.png", "scut-logo.png")]:
-        im = trim(open_rgba(os.path.join(SRC, name)))
-        w = im.width
-        im = im.resize((900, round(im.height * 900 / w)), Image.LANCZOS)
-        report.append(save_png(im, out))
-
     # ---------- sponsor logos (placed on white chips in the UI) ----------
     sp_dir = ensure("sponsors")
     wera_src = os.path.join(SRC, "赞助商", "wera白色.jpg")
