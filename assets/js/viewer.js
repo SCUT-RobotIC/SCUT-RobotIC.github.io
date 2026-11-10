@@ -138,11 +138,22 @@ function init() {
     if (statusEl) statusEl.textContent = text;
   }
 
-  function showProgress(loaded, total) {
+  function progressPercent(loaded, total, expected) {
+    if (!loaded) return 0;
+    // GitHub Pages 会 gzip .glb：evt.total 是压缩后大小，loaded 却是解压后大小，
+    // 直接相除会得到 200%。超过 total 时改用 manifest 里的真实字节数。
+    let denom = total;
+    if (expected && total && loaded > total * 1.02) denom = expected;
+    if (!denom) denom = expected;
+    if (!denom) return 0;
+    return Math.min(100, Math.max(0, Math.round((loaded / denom) * 100)));
+  }
+
+  function showProgress(loaded, total, expected) {
     if (!progressEl) return;
     if (total) {
       progressEl.classList.add("is-active");
-      const pct = Math.min(100, Math.round((loaded / total) * 100));
+      const pct = progressPercent(loaded, total, expected);
       if (progressBar) progressBar.style.width = pct + "%";
       if (pct >= 100) setTimeout(() => progressEl.classList.remove("is-active"), 260);
     }
@@ -183,14 +194,17 @@ function init() {
         frameObject(current);
 
         setStatus("就绪");
+        if (progressEl) progressEl.classList.remove("is-active");
         if (item.note) {
           const noteEl = document.querySelector("[data-viewer-note]");
           if (noteEl) noteEl.textContent = item.note;
         }
       },
       (evt) => {
-        showProgress(evt.loaded, evt.total);
-        if (evt.total) setStatus(`加载中 ${Math.round((evt.loaded / evt.total) * 100)}%`);
+        showProgress(evt.loaded, evt.total, item.bytes);
+        if (evt.total) {
+          setStatus(`加载中 ${progressPercent(evt.loaded, evt.total, item.bytes)}%`);
+        }
       },
       (err) => {
         console.error(err);
