@@ -2358,3 +2358,63 @@ button {
     height: 78px;
   }
 }
+/* ============================================
+   滚动出现动效增强
+   ============================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 错峰出现：如果 main.js 已经给元素加了 inline delay，这段会覆盖； 
+   如果没有，就靠这些类名手动控制 */
+[data-reveal-delay="80"]  { transition-delay: 80ms; }
+[data-reveal-delay="160"] { transition-delay: 160ms; }
+[data-reveal-delay="240"] { transition-delay: 240ms; }
+
+/* 无障碍：用户开启“减少动态”时只保留淡入 */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
+/* ============================================
+   卡片悬浮升级
+   ============================================ */
+.card,
+.showcase__item,
+.entry__item {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover,
+.showcase__item:hover,
+.entry__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  border-color: rgba(255, 255, 255, 0.12); /* 暗色卡片微亮边框；浅色卡片可删掉这行 */
+}
+
+.card:hover img,
+.showcase__item:hover img {
+  transform: scale(1.03);
+}
+
+/* 图片缩放本身需要 transition */
+.card img,
+.showcase__item img {
+  transition: transform 0.4s ease;
+}
