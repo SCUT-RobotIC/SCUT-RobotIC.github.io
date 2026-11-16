@@ -126,3 +126,59 @@
     el.textContent = String(new Date().getFullYear());
   });
 })();
+
+/* ============================================
+   机械臂 3D 拖拽交互
+   ============================================ */
+(function initVibeStage() {
+  const stage = document.getElementById('vibe-stage');
+  const img = document.getElementById('vibe-img');
+  if (!stage || !img) return;
+
+  let isDragging = false;
+  let startX = 0;
+  let currentRotate = 0;
+
+  stage.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    img.style.transition = 'none'; // 拖拽时取消过渡，实现跟手
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    currentRotate = dx * 0.2; // 控制旋转灵敏度
+    // 限制旋转角度在 -25 到 25 度之间
+    currentRotate = Math.max(-25, Math.min(25, currentRotate)); 
+    img.style.transform = `perspective(1000px) rotateY(${currentRotate}deg)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    // 松手后平滑回正
+    img.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    img.style.transform = `perspective(1000px) rotateY(0deg)`;
+  });
+
+  // 移动端触屏支持
+  stage.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    img.style.transition = 'none';
+  });
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    currentRotate = Math.max(-25, Math.min(25, dx * 0.2));
+    img.style.transform = `perspective(1000px) rotateY(${currentRotate}deg)`;
+  });
+  window.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    img.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    img.style.transform = `perspective(1000px) rotateY(0deg)`;
+  });
+})();
+
