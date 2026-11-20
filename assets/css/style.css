@@ -2747,72 +2747,78 @@ button {
   }
 }
 
-/* From Uiverse.io by satyamchaudharydev */ 
-button {
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-button {
-  --primary-color: #111;
-  --hovered-color: #c84747;
+/* ============================================
+   Uiverse 高级下划线文字按钮
+   ============================================ */
+.link-btn {
+  --primary-color: #e0e0e0; /* 原本的浅灰色文字 */
+  --hovered-color: #c84747; /* 悬浮时的红色 */
   position: relative;
-  display: flex;
+  display: inline-flex;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px; /* 适配你网站的字体大小 */
   gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 18px; /* 替代原来内联的 margin-top */
+  font-family: 'Inter', sans-serif;
 }
 
-button p {
+.link-btn p {
   margin: 0;
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
   color: var(--primary-color);
+  transition: 0.3s;
 }
 
-button::after {
+/* 底部的红线 */
+.link-btn::after {
   position: absolute;
   content: "";
   width: 0;
   left: 0;
-  bottom: -7px;
+  bottom: -4px; 
   background: var(--hovered-color);
   height: 2px;
   transition: 0.3s ease-out;
 }
 
-button p::before {
+/* 文字的红色覆盖层 */
+.link-btn p::before {
   position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Subscribe";
+  content: attr(data-text); /* 核心：自动读取 data-text 里的文字 */
   width: 0%;
   inset: 0;
   color: var(--hovered-color);
   overflow: hidden;
+  white-space: nowrap;
   transition: 0.3s ease-out;
 }
 
-button:hover::after {
+.link-btn:hover::after {
   width: 100%;
 }
 
-button:hover p::before {
+.link-btn:hover p::before {
   width: 100%;
 }
 
-button:hover svg {
+/* 箭头动画 */
+.link-btn:hover svg {
   transform: translateX(4px);
   color: var(--hovered-color);
 }
 
-button svg {
+.link-btn svg {
   color: var(--primary-color);
   transition: 0.2s;
   position: relative;
   width: 15px;
+  height: 15px;
   transition-delay: 0.2s;
 }
