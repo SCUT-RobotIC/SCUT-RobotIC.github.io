@@ -2903,3 +2903,105 @@ button {
   color: #8d94a1; /* 你网站的基础灰色 */
   line-height: 1.8;
 }
+
+/* =========================================
+   机械臂展示区重写
+   ========================================= */
+
+/* 1. 父容器改为纵向居中，让动画在上面 */
+.robot-showcase-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px; /* 调整上方间距 */
+  padding-bottom: 80px;
+}
+
+.svg-frame-wrapper {
+  margin-bottom: 50px; /* 动画与下方卡片的间距 */
+}
+
+/* 2. 限制卡片宽度，并用 gap 和背景色形成“一个大边框” */
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px; /* 中间只留 1px 缝隙 */
+  width: 100%;
+  max-width: 900px; /* 限制最大宽度，不再无限宽 */
+  margin: 0 auto;
+  background: var(--line); /* 缝隙的颜色（借用边框色） */
+  border: 1px solid var(--line-2); /* 最外侧的边框 */
+  border-radius: var(--radius-lg);
+  overflow: hidden; /* 切掉内部直角 */
+}
+
+/* 3. 单个卡片重置布局 */
+.showcase__item {
+  position: relative;
+  background: var(--bg-2); /* 卡片底色 */
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  border: none;
+  border-radius: 0;
+  align-items: stretch; /* 覆盖原来的 flex-end */
+  transition: background 0.3s ease;
+}
+
+.showcase__item:hover {
+  background: var(--surface);
+}
+
+/* 4. 图片不再绝对定位，自适应容器 */
+.showcase__item img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* 锁定比例，保证两张图一样高 */
+  object-fit: contain;
+  padding: 20px;
+  background: #f4f5f7; /* 图片背景色 */
+  border-bottom: 1px solid var(--line);
+  transition: transform 0.5s var(--ease);
+}
+
+.showcase__item:hover img {
+  transform: scale(1.04);
+}
+
+/* 5. 隐藏原先覆盖在底部的渐变黑遮罩 */
+.showcase__item::after {
+  display: none;
+}
+
+/* 6. 文字区域随流排列在图片下方 */
+.showcase__body {
+  position: relative;
+  z-index: 2;
+  padding: 28px 30px;
+  width: 100%;
+  flex-grow: 1;
+  background: transparent;
+}
+
+.showcase__body h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.showcase__body p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+/* 响应式调整（小屏幕变单列） */
+@media (max-width: 860px) {
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+}
