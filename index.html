@@ -394,16 +394,28 @@
   
 <!-- 桌面级机械臂展示区 -->
 <section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <p class="section-head__label">Our Equipments</p>
-        <h2>研发与测试平台</h2>
-      </div>
-      <p class="section-head__note">
-        感谢 eSun 易生提供的桌面级机械臂支持。我们在日常研发中利用该平台进行算法验证、抓取测试与视觉标定。
-      </p>
+  <div class="grid grid--2" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+  
+  <!-- 卡片 1 -->
+  <div class="uiverse-card">
+    <!-- 图片：确保路径正确 -->
+    <img src="assets/models/arm-1.png" alt="协作机械臂平台">
+    <div class="uiverse-card__content">
+      <p class="uiverse-card__title">协作机械臂平台</p>
+      <p class="uiverse-card__description">用于轻量级抓取与多轴联动测试，帮助算法组快速验证运动学解算结果。</p>
     </div>
+  </div>
+
+  <!-- 卡片 2 -->
+  <div class="uiverse-card">
+    <img src="assets/models/arm-2.png" alt="视觉与标定实验">
+    <div class="uiverse-card__content">
+      <p class="uiverse-card__title">视觉与标定实验</p>
+      <p class="uiverse-card__description">结合 OpenCV 与深度相机，完成目标识别与空间坐标精准定位的闭环实验。</p>
+    </div>
+  </div>
+
+</div>
 
     <!-- From Uiverse.io by Nawsome --> 
 <div class="svg-frame">
