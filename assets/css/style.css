@@ -3018,3 +3018,15 @@ button {
   transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
 }
+/* 给 Hero 区域开启 3D 透视空间 */
+.hero {
+  perspective: 1200px; 
+}
+
+/* 给图片加上平滑过渡，防止鼠标移动时抖动得太生硬 */
+.hero__media img {
+  /* 稍微放大一点，预留出旋转时的空间，避免边缘露出黑底 */
+  transform: scale(1.08); 
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
