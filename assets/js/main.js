@@ -126,3 +126,90 @@
     el.textContent = String(new Date().getFullYear());
   });
 })();
+/* ============================================
+   Hero 轻量视差
+   ============================================ */
+(function initHeroParallax() {
+  const heroMedia = document.querySelector('.hero__media');
+  if (!heroMedia) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (prefersReduced || isMobile) return;
+
+  let ticking = false;
+
+  function updateParallax() {
+    const scrollY = window.scrollY;
+    // 视差幅度：背景图最多上移 50px
+    const offset = Math.min(scrollY * 0.15, 50);
+    heroMedia.style.transform = `translateY(${offset}px)`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+/* ============================================
+   鼠标跟随光晕
+   ============================================ */
+(function initCursorGlow() {
+  const isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isDesktop || prefersReduced) return;
+
+  const glow = document.createElement('div');
+  glow.className = 'cursor-glow';
+  document.body.appendChild(glow);
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    glow.style.opacity = '1';
+  });
+
+  document.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+
+  function animate() {
+    // 平滑跟随：数值越小越“拖尾”，0.12 是比较克制的跟随感
+    currentX += (mouseX - currentX) * 0.12;
+    currentY += (mouseY - currentY) * 0.12;
+    glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const heroSection = document.querySelector('.hero');
+  const heroImg = document.querySelector('.hero__media img');
+
+  if (heroSection && heroImg) {
+    // 当鼠标在首屏移动时
+    heroSection.addEventListener('mousemove', (e) => {
+      // 计算鼠标位置相对屏幕中心的比例 (-1 到 1)
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      // 根据鼠标位置让图片 3D 旋转（数值 4 代表倾斜的角度，可自行调整）
+      heroImg.style.transform = `scale(1.08) rotateX(${y * -4}deg) rotateY(${x * 4}deg)`;
+    });
+
+    // 当鼠标离开首屏时，图片平滑复位
+    heroSection.addEventListener('mouseleave', () => {
+      heroImg.style.transform = `scale(1.08) rotateX(0deg) rotateY(0deg)`;
+    });
+  }
+});
