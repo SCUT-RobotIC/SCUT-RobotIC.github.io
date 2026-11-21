@@ -3070,3 +3070,45 @@ button {
   50% { transform: rotate(45deg) rotateX(-385deg) rotateY(25deg); }
   100% { transform: rotate(45deg) rotateX(-385deg) rotateY(385deg); }
 }
+
+/* 1. 隐藏原本的红色短横线 */
+.section-head__label::before {
+  display: none !important;
+}
+
+/* 2. 调整 3D 旋转方块，使其适配文字大小 */
+.spinner {
+  width: 16px; /* 缩小尺寸，适配 12px 的文字 */
+  height: 16px;
+  --clr: #e8261a; /* 你的主题红 */
+  --clr-alpha: rgba(232, 38, 26, 0.15);
+  animation: spinner 2.4s infinite ease;
+  transform-style: preserve-3d;
+  display: inline-block;
+  flex-shrink: 0;
+  margin-right: 8px; /* 和后面的文字拉开一点距离 */
+  vertical-align: middle; /* 确保垂直居中 */
+}
+
+.spinner > span {
+  background-color: var(--clr-alpha);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 1px solid var(--clr); /* 边框变细 */
+}
+
+/* 3D 位移按 16px 尺寸重新计算 */
+.spinner span:nth-of-type(1) { transform: translateZ(-8px) rotateY(180deg); }
+.spinner span:nth-of-type(2) { transform: rotateY(-270deg) translateX(50%); transform-origin: top right; }
+.spinner span:nth-of-type(3) { transform: rotateY(270deg) translateX(-50%); transform-origin: center left; }
+.spinner span:nth-of-type(4) { transform: rotateX(90deg) translateY(-50%); transform-origin: top center; }
+.spinner span:nth-of-type(5) { transform: rotateX(-90deg) translateY(50%); transform-origin: bottom center; }
+.spinner span:nth-of-type(6) { transform: translateZ(8px); }
+
+/* 原本的动画关键帧保持不变 */
+@keyframes spinner {
+  0% { transform: rotate(45deg) rotateX(-25deg) rotateY(25deg); }
+  50% { transform: rotate(45deg) rotateX(-385deg) rotateY(25deg); }
+  100% { transform: rotate(45deg) rotateX(-385deg) rotateY(385deg); }
+}
