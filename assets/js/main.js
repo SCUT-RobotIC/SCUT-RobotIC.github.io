@@ -191,3 +191,25 @@
 
   animate();
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const heroSection = document.querySelector('.hero');
+  const heroImg = document.querySelector('.hero__media img');
+
+  if (heroSection && heroImg) {
+    // 当鼠标在首屏移动时
+    heroSection.addEventListener('mousemove', (e) => {
+      // 计算鼠标位置相对屏幕中心的比例 (-1 到 1)
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      // 根据鼠标位置让图片 3D 旋转（数值 4 代表倾斜的角度，可自行调整）
+      heroImg.style.transform = `scale(1.08) rotateX(${y * -4}deg) rotateY(${x * 4}deg)`;
+    });
+
+    // 当鼠标离开首屏时，图片平滑复位
+    heroSection.addEventListener('mouseleave', () => {
+      heroImg.style.transform = `scale(1.08) rotateX(0deg) rotateY(0deg)`;
+    });
+  }
+});
