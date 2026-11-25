@@ -2757,3 +2757,51 @@ html, body {
 .bg-spinner svg path[fill="#00FFFF"] { fill: var(--red) !important; }
 .bg-spinner #out3 { stroke: var(--red-2) !important; }
 .bg-spinner #center1 { fill: var(--red-2) !important; }
+
+/* ============================================
+   终极修复版：雷达背景完美定位 + 机械臂图片不裁切
+   ============================================ */
+.robot-showcase-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+.bg-spinner {
+  position: absolute !important;
+  width: 350px !important;
+  height: 350px !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  opacity: 0.4;
+}
+.bg-spinner-left { top: -50px; left: -100px; }
+.bg-spinner-right { bottom: -50px; right: -100px; }
+.bg-spinner .svg-frame { width: 100% !important; height: 100% !important; }
+.bg-spinner svg { width: 100% !important; height: 100% !important; }
+.bg-spinner .svg-frame:hover svg { transform: none !important; } /* 禁止乱动 */
+.bg-spinner svg { filter: hue-rotate(160deg) saturate(3); } /* 强制变红 */
+.robot-showcase-section .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+.showcase__item {
+  min-height: 420px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; 
+  object-position: center bottom !important;
+  background-color: #1a1c22 !important; 
+  transform: none !important; 
+  padding: 20px !important;
+}
+.showcase__item::after {
+  background: linear-gradient(180deg, transparent 50%, rgba(8, 9, 11, 0.95) 100%) !important;
+}
+.showcase__body { position: relative !important; z-index: 2 !important; }
