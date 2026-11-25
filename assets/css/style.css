@@ -3397,3 +3397,52 @@ button {
 .robot-showcase-section .showcase__item:hover img {
   transform: scale(1.04);
 }
+
+/* ============================================
+   强制机械臂卡片与图谱卡片完美对齐
+   ============================================ */
+.robot-showcase-section .showcase__item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important; /* 文字死死贴在底部 */
+  min-height: 420px !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--line) !important;
+  background: #a1a6aa !important; /* 用灰色打底，防止纯白刺眼 */
+}
+
+/* 强制图片拉满铺满，不留任何白边 */
+.robot-showcase-section .showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* 核心：铺满裁切 */
+  object-position: center !important;
+  transform: none !important;
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 加深底部的黑色渐变遮罩，吃掉图片底部的白底 */
+.robot-showcase-section .showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 9, 11, 0.98) 95%) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* 文字层级 */
+.robot-showcase-section .showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 悬浮微动效 */
+.robot-showcase-section .showcase__item:hover img {
+  transform: scale(1.04) !important;
+}
