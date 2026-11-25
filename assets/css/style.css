@@ -2358,3 +2358,46 @@ button {
     height: 78px;
   }
 }
+
+/* ============================================
+   研发测试平台 背景雷达动效适配
+   ============================================ */
+/* 强制该区块相对定位，防溢出 */
+.robot-showcase-section {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 确保内容在动画上层 */
+.robot-showcase-section .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* 动画容器通用样式 */
+.bg-spinner {
+  position: absolute !important;
+  pointer-events: none !important; /* 防止遮挡鼠标操作 */
+  z-index: 1 !important;
+  opacity: 0.8;
+}
+
+/* 左上角定位与缩放 */
+.bg-spinner-left {
+  top: 10px;
+  left: -60px;
+  transform: scale(0.6);
+}
+
+/* 右下角定位与缩放 */
+.bg-spinner-right {
+  bottom: 10px;
+  right: -60px;
+  transform: scale(0.7);
+}
+
+/* 颜色融合：把原版的青色、黄色全部替换为网站的红色系 */
+.bg-spinner svg path[stroke="#00FFFF"] { stroke: var(--red) !important; }
+.bg-spinner svg path[fill="#00FFFF"] { fill: var(--red) !important; }
+.bg-spinner #out3 { stroke: var(--red-2) !important; }
+.bg-spinner #center1 { fill: var(--red-2) !important; }
