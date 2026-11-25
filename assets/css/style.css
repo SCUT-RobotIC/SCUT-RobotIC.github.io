@@ -3624,3 +3624,24 @@ button {
 .showcase__item:hover img {
   transform: scale(1.06) !important;
 }
+/* ============================================
+   Button 17 - Ghost 透明变体（用于招商合作）
+   ============================================ */
+.btn-17.btn-17--ghost {
+  background-color: transparent;
+  /* 因为是在暗色背景上，用半透明白色做边框 */
+  border-color: rgba(255, 255, 255, 0.4); 
+  color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+/* 悬停时边框变实 */
+.btn-17.btn-17--ghost:hover {
+  border-color: #fff;
+}
+
+/* 修正按钮内边距，让你两个按钮高度完全一致 */
+/* 你原来的 btn-17 是 0.8rem 3rem，这里保持统一 */
+.btn-17.btn-17--ghost {
+  padding: 0.8rem 3rem; 
+}
