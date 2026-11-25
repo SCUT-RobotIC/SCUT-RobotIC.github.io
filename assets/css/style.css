@@ -3446,3 +3446,29 @@ button {
 .robot-showcase-section .showcase__item:hover img {
   transform: scale(1.04) !important;
 }
+
+/* ============================================
+   机械臂卡片：彻底消灭白边 + 完美铺满
+   ============================================ */
+/* 确保卡片有高度，且内容靠底对齐 */
+.showcase__item {
+  min-height: 420px;
+}
+
+/* 强制图片铺满，并放大一点点裁掉边缘可能存在的白边 */
+.showcase__item img {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  /* 核心：放大 1.1 倍，把图片自带的白色边框裁切到画面之外 */
+  transform: translate(-50%, -50%) scale(1.1) !important; 
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 悬浮时微微再放大 */
+.showcase__item:hover img {
+  transform: translate(-50%, -50%) scale(1.15) !important;
+}
