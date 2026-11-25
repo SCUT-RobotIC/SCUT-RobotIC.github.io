@@ -3341,3 +3341,59 @@ button {
 .btn-17:hover:after {
   --progress: -102%;
 }
+
+/* ============================================
+   修复机械臂卡片留白，完全还原图2沉浸式效果
+   ============================================ */
+.robot-showcase-section .showcase__item {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #14161b; /* 深色背景托底 */
+  display: flex;
+  align-items: flex-end; /* 内容靠底对齐 */
+  min-height: 420px; /* 确保和旁边的卡片一样高 */
+  border: 1px solid var(--line);
+}
+
+/* 图片处理：居中裁切，彻底铺满整个卡片 */
+.robot-showcase-section .showcase__item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 关键：裁切铺满，消灭白边 */
+  object-position: center; /* 居中裁切 */
+  transform: none;
+  mix-blend-mode: normal; /* 取消之前的混合模式 */
+  transition: transform 0.8s var(--ease);
+}
+
+/* 底部黑色渐变遮罩，让文字清清楚楚 */
+.robot-showcase-section .showcase__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(8, 9, 11, 0.95) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 文字区域层级提升，压在遮罩上面 */
+.robot-showcase-section .showcase__body {
+  position: relative;
+  z-index: 2;
+  padding: 34px;
+  width: 100%;
+}
+
+/* 鼠标悬浮时，卡片整体上浮，图片微微放大 */
+.robot-showcase-section .showcase__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.robot-showcase-section .showcase__item:hover img {
+  transform: scale(1.04);
+}
