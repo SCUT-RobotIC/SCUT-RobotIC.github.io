@@ -389,7 +389,18 @@
 </section>
   
 <!-- 桌面级机械臂展示区 -->
-<section class="section robot-showcase-section">
+<section class="section">
+  <div class="container">
+    <!-- 标题部分 -->
+    <div class="section-head">
+      <div>
+        <p class="section-head__label">Equipments</p>
+        <h2>研发与测试平台</h2>
+      </div>
+      <p class="section-head__note">
+        感谢 eSun 易生提供的桌面级机械臂支持。我们在日常研发中利用该平台进行算法验证、抓取测试与视觉标定。
+      </p>
+    </div>
   
     <!-- 1. 把转圈动画放到上方 -->
     <div class="svg-frame-wrapper">
@@ -439,25 +450,29 @@
 	</svg>
 </div>
 
-    <!-- 2. 卡片容器 -->
+    <!-- 卡片部分（完全照抄图2的 structure） -->
     <div class="showcase">
-      <div class="showcase__item" data-reveal>
-        <!-- 去掉 inline style -->
-        <img src="assets/models/arm-1.png" alt="eSun 桌面级机械臂渲染图 1" loading="lazy">
+      <!-- 卡片 1 -->
+      <a class="showcase__item" href="#" data-reveal>
+        <img src="assets/models/arm-1.png" alt="协作机械臂平台" loading="lazy">
         <div class="showcase__body">
           <h3>协作机械臂平台</h3>
           <p>用于轻量级抓取与多轴联动测试，帮助算法组快速验证运动学解算结果。</p>
+          <div class="card__specs"><span>双臂结构</span><span>视觉标定</span></div>
         </div>
-      </div>
-      <div class="showcase__item" data-reveal data-reveal-delay="100">
-        <img src="assets/models/arm-2.png" alt="eSun 桌面级机械臂渲染图 2" loading="lazy">
+      </a>
+
+      <!-- 卡片 2 -->
+      <a class="showcase__item" href="#" data-reveal data-reveal-delay="100">
+        <img src="assets/models/arm-2.png" alt="视觉与标定实验" loading="lazy">
         <div class="showcase__body">
           <h3>视觉与标定实验</h3>
           <p>结合 OpenCV 与深度相机，完成目标识别与空间坐标精准定位的闭环实验。</p>
+          <div class="card__specs"><span>深度相机</span><span>闭环实验</span></div>
         </div>
-      </div>
+      </a>
     </div>
-
+  </div>
 </section>
   
 <section class="section">
