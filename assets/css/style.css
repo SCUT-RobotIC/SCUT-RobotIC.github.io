@@ -3172,3 +3172,65 @@ button {
     transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
   }
 }
+
+/* ============================================
+   专门修复机械臂展示区（白底图片暗色适配）
+   ============================================ */
+/* 限定只对当前区块生效，不影响上面“机器人家谱” */
+.robot-showcase-section .showcase__item {
+  position: relative;
+  background-color: #14161b; /* 使用网站的深色背景 */
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* 内容靠下对齐 */
+  min-height: 420px;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+/* 图片处理：不撑满，居中显示，留出空间 */
+.robot-showcase-section .showcase__item img {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 60%;
+  object-fit: contain; /* 完整显示图片，不裁切 */
+  transition: transform 0.6s var(--ease);
+  /* 使用正片叠底，让图片的浅灰背景完美融合进深色卡片 */
+  mix-blend-mode: lighten; 
+}
+
+/* 恢复原本的黑色渐变遮罩，让文字清晰可见 */
+.robot-showcase-section .showcase__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(8, 9, 11, 0.95) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 文字区域提升层级，盖在渐变遮罩之上 */
+.robot-showcase-section .showcase__body {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  width: 100%;
+  text-align: left;
+}
+
+/* 悬浮动效：卡片上浮，图片轻微放大 */
+.robot-showcase-section .showcase__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.robot-showcase-section .showcase__item:hover img {
+  transform: translateX(-50%) scale(1.05);
+}
