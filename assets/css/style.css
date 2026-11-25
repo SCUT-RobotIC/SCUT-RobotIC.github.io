@@ -2860,3 +2860,54 @@ html, body {
 .robot-showcase-section .showcase__item:hover img {
   transform: scale(1.06) !important;
 }
+
+/* ============================================
+   终极暴力全屏铺满（强制抹杀一切边框）
+   ============================================ */
+/* 强制所有卡片使用铺满布局 */
+.showcase__item {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  min-height: 420px !important;
+  background: #14161b !important; /* 深色底，就算图片没加载出来也不会白屏 */
+}
+
+/* 强制图片放大填满，把图片自带的边缘白框挤出可视区 */
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+  /* 👇 放大 1.15 倍，这是消灭原图白边的杀手锏 */
+  transform: scale(1.15) !important; 
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 强制底部加一层极深的黑色渐变，保证文字清晰 */
+.showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 9, 11, 0.98) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 文字区域浮在渐变层上面 */
+.showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 鼠标悬浮时，图片再次微放大 */
+.showcase__item:hover img {
+  transform: scale(1.2) !important;
+}
