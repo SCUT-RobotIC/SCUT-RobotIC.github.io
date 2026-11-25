@@ -2358,3 +2358,556 @@ button {
     height: 78px;
   }
 }
+/* ============================================
+   滚动出现动效增强
+   ============================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 错峰出现：如果 main.js 已经给元素加了 inline delay，这段会覆盖； 
+   如果没有，就靠这些类名手动控制 */
+[data-reveal-delay="80"]  { transition-delay: 80ms; }
+[data-reveal-delay="160"] { transition-delay: 160ms; }
+[data-reveal-delay="240"] { transition-delay: 240ms; }
+
+/* 无障碍：用户开启“减少动态”时只保留淡入 */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
+/* ============================================
+   卡片悬浮升级
+   ============================================ */
+.card,
+.showcase__item,
+.entry__item {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover,
+.showcase__item:hover,
+.entry__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  border-color: rgba(255, 255, 255, 0.12); /* 暗色卡片微亮边框；浅色卡片可删掉这行 */
+}
+
+.card:hover img,
+.showcase__item:hover img {
+  transform: scale(1.03);
+}
+
+/* 图片缩放本身需要 transition */
+.card img,
+.showcase__item img {
+  transition: transform 0.4s ease;
+}
+/* ============================================
+   鼠标跟随光晕
+   ============================================ */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle,
+    rgba(120, 160, 255, 0.08) 0%,
+    rgba(120, 160, 255, 0.03) 30%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+@media (max-width: 1024px), (prefers-reduced-motion: reduce) {
+  .cursor-glow { display: none; }
+}
+
+/* ============================================
+   滚动出现动效增强
+   ============================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-delay="80"] { transition-delay: 80ms; }
+[data-reveal-delay="160"] { transition-delay: 160ms; }
+[data-reveal-delay="240"] { transition-delay: 240ms; }
+
+/* ============================================
+   卡片悬浮升级
+   ============================================ */
+.card, .showcase__item, .entry__item {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover, .showcase__item:hover, .entry__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.card:hover img, .showcase__item:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   鼠标跟随光晕
+   ============================================ */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(circle, rgba(120, 160, 255, 0.08) 0%, rgba(120, 160, 255, 0.03) 30%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+@media (max-width: 1024px), (prefers-reduced-motion: reduce) {
+  .cursor-glow { display: none; }
+}
+
+/* ============================================
+   新版 17 号按钮 (加入实验室)
+   ============================================ */
+.btn-17 {
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 99rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 28px;
+  z-index: 0;
+  color: #fff;
+  transition: border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-17:hover { border-color: #fff; }
+.btn-17 .text-container { display: block; position: relative; }
+.btn-17 .text { display: block; position: relative; white-space: nowrap; transition: color 0.2s ease; }
+.btn-17:hover .text {
+  animation: move-up-alternate 0.3s forwards;
+  color: #000;
+}
+@keyframes move-up-alternate {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(80%); }
+  51% { transform: translateY(-80%); }
+  to { transform: translateY(0); }
+}
+.btn-17:after, .btn-17:before {
+  --skew: 0.2;
+  background: #fff;
+  content: "";
+  display: block;
+  height: 102%;
+  left: calc(-50% - 50% * var(--skew));
+  pointer-events: none;
+  position: absolute;
+  top: -104%;
+  transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+.btn-17:after { --progress: 0%; left: calc(50% + 50% * var(--skew)); top: 102%; z-index: -1; }
+.btn-17:hover:before { --progress: 100%; }
+.btn-17:hover:after { --progress: -102%; }
+
+/* ============================================
+   下划线文字按钮 (link-btn)
+   ============================================ */
+.link-btn {
+  --primary-color: #e0e0e0;
+  --hovered-color: #c84747;
+  position: relative;
+  display: inline-flex;
+  font-weight: 600;
+  font-size: 16px;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  white-space: nowrap;
+  font-family: var(--sans);
+  width: fit-content;
+  justify-content: flex-start;
+  align-self: flex-start;
+}
+.link-btn span { margin: 0; position: relative; font-size: 16px; color: var(--primary-color); transition: 0.3s; white-space: nowrap; }
+.link-btn::after { position: absolute; content: ""; width: 0; left: 0; bottom: -4px; background: var(--hovered-color); height: 2px; transition: 0.3s ease-out; }
+.link-btn span::before { position: absolute; content: attr(data-text); width: 0%; inset: 0; color: var(--hovered-color); overflow: hidden; white-space: nowrap; transition: 0.3s ease-out; }
+.link-btn:hover::after { width: 100%; }
+.link-btn:hover span::before { width: 100%; }
+.link-btn:hover svg { transform: translateX(4px); color: var(--hovered-color); }
+.link-btn svg { color: var(--primary-color); transition: 0.2s; position: relative; width: 15px; height: 15px; transition-delay: 0.2s; flex-shrink: 0; }
+
+/* ============================================
+   机械臂卡片完美覆盖版（彻底解决白边和文字问题）
+   ============================================ */
+/* 强制将图片作为背景铺满 */
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  /* 放大一点点，裁掉边缘多余的白边 */
+  transform: scale(1.05) !important;
+  transition: transform 0.8s var(--ease) !important;
+  z-index: 0 !important;
+}
+
+/* 悬浮放大 */
+.showcase__item:hover img {
+  transform: scale(1.1) !important;
+}
+
+/* 加深底部渐变，保证不管图片多白，底部文字一定清晰 */
+.showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 9, 11, 0.98) 95%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 文字区域层级拔高 */
+.showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* ============================================
+   (可选) 如果页面标题里有那个转圈方块，这里保留样式
+   ============================================ */
+.spinner {
+  width: 24px;
+  height: 24px;
+  --clr: #e8261a;
+  --clr-alpha: rgba(232, 38, 26, 0.15);
+  animation: spinner 2.4s infinite ease;
+  transform-style: preserve-3d;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.spinner > div {
+  background-color: var(--clr-alpha);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 1.5px solid var(--clr);
+}
+.spinner div:nth-of-type(1) { transform: translateZ(-12px) rotateY(180deg); }
+.spinner div:nth-of-type(2) { transform: rotateY(-270deg) translateX(50%); transform-origin: top right; }
+.spinner div:nth-of-type(3) { transform: rotateY(270deg) translateX(-50%); transform-origin: center left; }
+.spinner div:nth-of-type(4) { transform: rotateX(90deg) translateY(-50%); transform-origin: top center; }
+.spinner div:nth-of-type(5) { transform: rotateX(-90deg) translateY(50%); transform-origin: bottom center; }
+.spinner div:nth-of-type(6) { transform: translateZ(12px); }
+@keyframes spinner {
+  0% { transform: rotate(45deg) rotateX(-25deg) rotateY(25deg); }
+  50% { transform: rotate(45deg) rotateX(-385deg) rotateY(25deg); }
+  100% { transform: rotate(45deg) rotateX(-385deg) rotateY(385deg); }
+}
+
+/* ==========================================
+   1. 修复幽灵按钮样式
+   ========================================== */
+.btn-17.btn-17--ghost {
+  background-color: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+  transition: border-color 0.3s ease;
+}
+
+.btn-17.btn-17--ghost:hover {
+  border-color: #fff !important;
+}
+
+/* ==========================================
+   2. 修复背景露黑边、页面变窄的问题
+   ========================================== */
+/* 确保按钮父容器允许换行，绝对不会撑破页面 */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap; /* 关键：防止按钮挤在一行把页面撑宽 */
+  gap: 14px;
+  align-items: center;
+}
+
+/* 强制隐藏可能产生的横向滚动条 */
+html, body {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* 强制首屏背景图铺满全屏 */
+.hero {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+/* ============================================
+   研发测试平台 背景雷达动效适配
+   ============================================ */
+/* 强制该区块相对定位，防溢出 */
+.robot-showcase-section {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 确保内容在动画上层 */
+.robot-showcase-section .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* 动画容器通用样式 */
+.bg-spinner {
+  position: absolute !important;
+  pointer-events: none !important; /* 防止遮挡鼠标操作 */
+  z-index: 1 !important;
+  opacity: 0.8;
+}
+
+/* 左上角定位与缩放 */
+.bg-spinner-left {
+  top: 10px;
+  left: -60px;
+  transform: scale(0.6);
+}
+
+/* 右下角定位与缩放 */
+.bg-spinner-right {
+  bottom: 10px;
+  right: -60px;
+  transform: scale(0.7);
+}
+
+/* 颜色融合：把原版的青色、黄色全部替换为网站的红色系 */
+.bg-spinner svg path[stroke="#00FFFF"] { stroke: var(--red) !important; }
+.bg-spinner svg path[fill="#00FFFF"] { fill: var(--red) !important; }
+.bg-spinner #out3 { stroke: var(--red-2) !important; }
+.bg-spinner #center1 { fill: var(--red-2) !important; }
+
+/* ============================================
+   终极修复版：雷达背景完美定位 + 机械臂图片不裁切
+   ============================================ */
+.robot-showcase-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+.bg-spinner {
+  position: absolute !important;
+  width: 350px !important;
+  height: 350px !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  opacity: 0.4;
+}
+.bg-spinner-left { top: -50px; left: -100px; }
+.bg-spinner-right { bottom: -50px; right: -100px; }
+.bg-spinner .svg-frame { width: 100% !important; height: 100% !important; }
+.bg-spinner svg { width: 100% !important; height: 100% !important; }
+.bg-spinner .svg-frame:hover svg { transform: none !important; } /* 禁止乱动 */
+.bg-spinner svg { filter: hue-rotate(160deg) saturate(3); } /* 强制变红 */
+.robot-showcase-section .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+.showcase__item {
+  min-height: 420px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; 
+  object-position: center bottom !important;
+  background-color: #1a1c22 !important; 
+  transform: none !important; 
+  padding: 20px !important;
+}
+.showcase__item::after {
+  background: linear-gradient(180deg, transparent 50%, rgba(8, 9, 11, 0.95) 100%) !important;
+}
+.showcase__body { position: relative !important; z-index: 2 !important; }
+
+/* ============================================
+   终极恢复版：无雷达，纯正铺满，文字压黑底
+   ============================================ */
+/* 1. 彻底删除雷达占用的空间 */
+.bg-spinner { display: none !important; }
+
+/* 2. 恢复卡片的沉浸式样式 */
+.robot-showcase-section .showcase__item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important; /* 文字靠底 */
+  min-height: 420px !important;
+  overflow: hidden !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--line) !important;
+  background-color: #14161b !important; /* 深色打底 */
+}
+
+/* 3. 图片强制铺满（cover），不留白边 */
+.robot-showcase-section .showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+  object-position: center !important;
+  /* 放大一丁点，把图片边缘的白边裁掉 */
+  transform: scale(1.02) !important; 
+  transition: transform 0.8s var(--ease) !important;
+  padding: 0 !important;
+}
+
+/* 4. 加深底部的黑色渐变遮罩，保证白字绝对清晰 */
+.robot-showcase-section .showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 9, 11, 0.95) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 5. 文字层级拔高，盖在渐变层上面 */
+.robot-showcase-section .showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 6. 悬浮微微放大 */
+.robot-showcase-section .showcase__item:hover img {
+  transform: scale(1.06) !important;
+}
+
+/* ============================================
+   终极暴力全屏铺满（强制抹杀一切边框）
+   ============================================ */
+/* 强制所有卡片使用铺满布局 */
+.showcase__item {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  min-height: 420px !important;
+  background: #14161b !important; /* 深色底，就算图片没加载出来也不会白屏 */
+}
+
+/* 强制图片放大填满，把图片自带的边缘白框挤出可视区 */
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+  /* 👇 放大 1.15 倍，这是消灭原图白边的杀手锏 */
+  transform: scale(1.15) !important; 
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 强制底部加一层极深的黑色渐变，保证文字清晰 */
+.showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 9, 11, 0.98) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 文字区域浮在渐变层上面 */
+.showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 鼠标悬浮时，图片再次微放大 */
+.showcase__item:hover img {
+  transform: scale(1.2) !important;
+}
