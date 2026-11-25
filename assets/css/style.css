@@ -3472,3 +3472,57 @@ button {
 .showcase__item:hover img {
   transform: translate(-50%, -50%) scale(1.15) !important;
 }
+
+/* ============================================
+   终极强制版：机械臂全屏铺满 + 底部渐变
+   ============================================ */
+.showcase__item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important; /* 文字沉底 */
+  min-height: 450px !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  background: #14161b !important; /* 深色底 */
+  border: 1px solid var(--line) !important;
+}
+
+/* 强制图片铺满整个卡片作为背景 */
+.showcase__item img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transform: none !important; 
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 强制添加底部的黑色渐变遮罩，让文字清晰可见 */
+.showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  /* 下半部分渐变为深黑色，吃掉图片原本的白底 */
+  background: linear-gradient(180deg, transparent 40%, rgba(11, 12, 14, 0.95) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 强制文字浮在遮罩上方 */
+.showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 悬浮微微放大效果 */
+.showcase__item:hover img {
+  transform: scale(1.05) !important;
+}
