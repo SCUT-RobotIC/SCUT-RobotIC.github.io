@@ -3234,3 +3234,110 @@ button {
 .robot-showcase-section .showcase__item:hover img {
   transform: translateX(-50%) scale(1.05);
 }
+
+/* ============================================
+   新版 17 号按钮 (完美适配暗色主题)
+   ============================================ */
+.btn-17,
+.btn-17 *,
+.btn-17 :after,
+.btn-17 :before,
+.btn-17:after,
+.btn-17:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-17 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 14px; /* 与你旁边的按钮保持大小一致 */
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  
+  border-radius: 99rem;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 默认淡白色边框 */
+  padding: 12px 28px;
+  z-index: 0;
+  color: #fff; /* 默认白字 */
+  transition: border-color 0.2s ease;
+}
+
+.btn-17:hover {
+  border-color: #fff;
+}
+
+.btn-17,
+.btn-17 .text-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-17 .text-container {
+  display: block;
+  /* 已删掉原版导致重叠的 mix-blend-mode */
+}
+
+.btn-17 .text {
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* 悬浮时文字向上跑再回来的动画 */
+.btn-17:hover .text {
+  -webkit-animation: move-up-alternate 0.3s forwards;
+  animation: move-up-alternate 0.3s forwards;
+  color: #000; /* 因为背景马上要变白，所以字变黑 */
+}
+
+@keyframes move-up-alternate {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(80%); }
+  51% { transform: translateY(-80%); }
+  to { transform: translateY(0); }
+}
+
+/* 背景斜切填充特效 */
+.btn-17:after,
+.btn-17:before {
+  --skew: 0.2;
+  background: #fff;
+  content: "";
+  display: block;
+  height: 102%;
+  left: calc(-50% - 50% * var(--skew));
+  pointer-events: none;
+  position: absolute;
+  top: -104%;
+  transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.btn-17:after {
+  --progress: 0%;
+  left: calc(50% + 50% * var(--skew));
+  top: 102%;
+  z-index: -1;
+}
+
+.btn-17:hover:before {
+  --progress: 100%;
+}
+
+.btn-17:hover:after {
+  --progress: -102%;
+}
