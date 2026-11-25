@@ -2659,3 +2659,58 @@ button {
   50% { transform: rotate(45deg) rotateX(-385deg) rotateY(25deg); }
   100% { transform: rotate(45deg) rotateX(-385deg) rotateY(385deg); }
 }
+
+/* ==========================================
+   1. 修复幽灵按钮样式
+   ========================================== */
+.btn-17.btn-17--ghost {
+  background-color: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+  transition: border-color 0.3s ease;
+}
+
+.btn-17.btn-17--ghost:hover {
+  border-color: #fff !important;
+}
+
+/* ==========================================
+   2. 修复背景露黑边、页面变窄的问题
+   ========================================== */
+/* 确保按钮父容器允许换行，绝对不会撑破页面 */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap; /* 关键：防止按钮挤在一行把页面撑宽 */
+  gap: 14px;
+  align-items: center;
+}
+
+/* 强制隐藏可能产生的横向滚动条 */
+html, body {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* 强制首屏背景图铺满全屏 */
+.hero {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
