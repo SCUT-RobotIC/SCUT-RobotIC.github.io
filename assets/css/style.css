@@ -3575,3 +3575,52 @@ button {
 .showcase__item:hover img {
   transform: scale(1.06) !important;
 }
+
+/* ============================================
+   机械臂卡片对齐 R2 26 赛季样式
+   ============================================ */
+.showcase__item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  min-height: 420px !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--line) !important;
+  background: #14161b !important;
+}
+
+/* 强制图片铺满，裁掉多余白边 */
+.showcase__item img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+  object-position: center !important;
+  transform: scale(1.02) !important; /* 稍微放大一点点避免白边 */
+  transition: transform 0.8s var(--ease) !important;
+}
+
+/* 增加底部黑色渐变遮罩，让白色文字清晰可见 */
+.showcase__item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(11, 12, 14, 0.95) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* 文字浮在渐变层之上 */
+.showcase__body {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px !important;
+  width: 100% !important;
+}
+
+/* 鼠标悬浮动效 */
+.showcase__item:hover img {
+  transform: scale(1.06) !important;
+}
